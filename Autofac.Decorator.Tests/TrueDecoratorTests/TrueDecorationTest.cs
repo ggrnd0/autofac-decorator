@@ -19,20 +19,20 @@ namespace Autofac.Decorator.Tests.TrueDecoratorTests
                 .WithParameter("add", 90);
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("X")
-                .WithParameter("add", 800);
+                .WithParameter("add", 900);
 
             b.RegisterDecorator<IXService>(t => t, fromKey: "X", toKey: "Y");
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("Y")
-                .WithParameter("add", 7000);
+                .WithParameter("add", 8000);
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("Y")
-                .WithParameter("add", 60000);
+                .WithParameter("add", 80000);
 
             b.RegisterDecorator<IXService>(t => t, fromKey: "X");
             b.RegisterTrueDecorator<XDecorator>()
                 .As<IXService>()
-                .WithParameter("add", 500000);
+                .WithParameter("add", 700000);
 
             var c = b.Build();
 
@@ -40,15 +40,15 @@ namespace Autofac.Decorator.Tests.TrueDecoratorTests
             {
                 var x = scope.ResolveNamed<IXService>("X");
 
-                Assert.AreEqual(x.X(), 891);
+                Assert.AreEqual(x.X(), 991);
 
                 x = scope.ResolveNamed<IXService>("Y");
 
-                Assert.AreEqual(x.X(), 67891);
+                Assert.AreEqual(x.X(), 88991);
 
                 x = scope.Resolve<IXService>();
 
-                Assert.AreEqual(x.X(), 500891);
+                Assert.AreEqual(x.X(), 700991);
             }
         }
     }
