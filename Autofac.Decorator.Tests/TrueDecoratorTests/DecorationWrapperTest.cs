@@ -40,11 +40,11 @@ namespace Autofac.Decorator.Tests.TrueDecoratorTests
 
             using (var scope = c.BeginLifetimeScope())
             {
-                var x = scope.ResolveKeyed<IXService>("X");
+                var x = scope.ResolveNamed<IXService>("X");
 
                 Assert.AreEqual(x.X(), 334);
 
-                x = scope.ResolveKeyed<IXService>("Y");
+                x = scope.ResolveNamed<IXService>("Y");
 
                 Assert.AreEqual(x.X(), 33334);
 
