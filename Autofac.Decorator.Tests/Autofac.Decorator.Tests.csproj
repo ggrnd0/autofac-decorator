@@ -55,13 +55,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DecorationWrapperTests\DecorationWrapperTest.cs" />
-    <Compile Include="DecorationWrapperTests\Impl\XDecorationWrapper.cs" />
-    <Compile Include="DecorationWrapperTests\Impl\XDecorator.cs" />
-    <Compile Include="DecorationWrapperTests\Impl\XDecoratorProvider.cs" />
-    <Compile Include="DecorationWrapperTests\Impl\XServiceImpl.cs" />
-    <Compile Include="DecorationWrapperTests\IXService.cs" />
-    <Compile Include="DecorationWrapperTests\XFactor.cs" />
+    <Compile Include="Impl\XDecorationWrapper.cs" />
+    <Compile Include="Impl\XDecorator.cs" />
+    <Compile Include="Impl\XDecoratorProvider.cs" />
+    <Compile Include="Impl\XServiceImpl.cs" />
+    <Compile Include="IXService.cs" />
+    <Compile Include="TrueDecoratorTests\AutofacContainerBuilderExtensions.cs" />
+    <Compile Include="XFactor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrueDecoratorTests\DecorationWrapperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Autofac.Decorator\Autofac.Decorator.csproj">

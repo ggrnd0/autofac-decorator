@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Autofac.Decorator.Tests.DecorationWrapperTests.Impl;
 using System.Collections.Generic;
+using Autofac.Decorator.Tests.Impl;
 
 namespace Autofac.Decorator.Tests.DecorationWrapperTests
 {
@@ -14,8 +14,8 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
             var b = new ContainerBuilder();
 
             b.RegisterInstance(new XFactor(3));
-            b.RegisterType<XServiceImpl>().Named<IXService>("X");
 
+            b.RegisterType<XServiceImpl>().Named<IXService>("X");
             b.RegisterDecorator<IXService>(
                 (s, t) => new XDecorationWrapper(t, s.Resolve<IComponentContext>().Resolve<IEnumerable<IDecoratorProvider<IXService>>>()),
                 fromKey: "X"
@@ -23,18 +23,19 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
 
             b.RegisterType<XDecoratorProvider>()
                 .As<IDecoratorProvider<IXService>>()
-                .WithParameter("mult", 10)
-                .InstancePerDependency();
+                .WithParameter("mult", 10);
             b.RegisterType<XDecoratorProvider>()
                 .As<IDecoratorProvider<IXService>>()
-                .WithParameter("mult", 100)
-                .InstancePerDependency();
+                .WithParameter("mult", 100);
 
             var c = b.Build();
 
-            var x = c.Resolve<IXService>();
+            using (var scope = c.BeginLifetimeScope())
+            {
+                var x = scope.Resolve<IXService>();
 
-            Assert.AreEqual(x.X(), 334);
+                Assert.AreEqual(x.X(), 334);
+            }
         }
     }
 }

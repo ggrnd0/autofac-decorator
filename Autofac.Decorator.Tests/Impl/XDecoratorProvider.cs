@@ -4,28 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Autofac.Decorator.Tests.DecorationWrapperTests.Impl
+namespace Autofac.Decorator.Tests.Impl
 {
-    class XDecorator : IXService
+    class XDecoratorProvider : IDecoratorProvider<IXService>
     {
-        private IXService _target;
         private XFactor _factor;
         private int _mult;
 
-        public XDecorator(
-            IXService target,
+        public XDecoratorProvider(
             XFactor factor,
             int mult
             )
         {
-            _target = target;
             _factor = factor;
             _mult = mult;
         }
 
-        public int X()
+        public IXService Decorate(IXService target)
         {
-            return _target.X() + _factor.Factor * _mult;
+            return new XDecorator(target, _factor, _mult);
         }
     }
 }

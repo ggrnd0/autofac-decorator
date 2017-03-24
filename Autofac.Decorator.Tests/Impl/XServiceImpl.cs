@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Autofac.Decorator.Tests.DecorationWrapperTests.Impl
+namespace Autofac.Decorator.Tests.Impl
 {
     class XServiceImpl : IXService
     {
