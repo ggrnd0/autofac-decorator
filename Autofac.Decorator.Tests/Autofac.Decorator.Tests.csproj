@@ -62,7 +62,7 @@
     <Compile Include="IXService.cs" />
     <Compile Include="TrueDecoratorTests\AutofacContainerBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrueDecoratorTests\DecorationWrapperTest.cs" />
+    <Compile Include="TrueDecoratorTests\TrueDecorationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Autofac.Decorator\Autofac.Decorator.csproj">
