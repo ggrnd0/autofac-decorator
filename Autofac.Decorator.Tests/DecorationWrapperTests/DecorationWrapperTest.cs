@@ -24,7 +24,7 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
                 .WithParameter("add", 90);
             b.RegisterType<XDecoratorProvider>()
                 .As<IDecoratorProvider<IXService>>()
-                .WithParameter("add", 900);
+                .WithParameter("add", 800);
 
             var c = b.Build();
 
@@ -32,7 +32,7 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
             {
                 var x = scope.Resolve<IXService>();
 
-                Assert.AreEqual(x.X(), 991);
+                Assert.AreEqual(x.X(), 891);
             }
         }
     }
