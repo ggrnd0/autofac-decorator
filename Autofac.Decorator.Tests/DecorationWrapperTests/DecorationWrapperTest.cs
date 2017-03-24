@@ -12,9 +12,7 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
         public void Test()
         {
             var b = new ContainerBuilder();
-
-            b.RegisterInstance(new XFactor(3));
-
+            
             b.RegisterType<XServiceImpl>().Named<IXService>("X");
             b.RegisterDecorator<IXService>(
                 (s, t) => new XDecorationWrapper(t, s.Resolve<IComponentContext>().Resolve<IEnumerable<IDecoratorProvider<IXService>>>()),
@@ -23,10 +21,10 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
 
             b.RegisterType<XDecoratorProvider>()
                 .As<IDecoratorProvider<IXService>>()
-                .WithParameter("mult", 10);
+                .WithParameter("add", 90);
             b.RegisterType<XDecoratorProvider>()
                 .As<IDecoratorProvider<IXService>>()
-                .WithParameter("mult", 100);
+                .WithParameter("add", 800);
 
             var c = b.Build();
 
@@ -34,7 +32,7 @@ namespace Autofac.Decorator.Tests.DecorationWrapperTests
             {
                 var x = scope.Resolve<IXService>();
 
-                Assert.AreEqual(x.X(), 334);
+                Assert.AreEqual(x.X(), 891);
             }
         }
     }

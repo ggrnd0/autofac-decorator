@@ -8,21 +8,16 @@ namespace Autofac.Decorator.Tests.Impl
 {
     class XDecoratorProvider : IDecoratorProvider<IXService>
     {
-        private XFactor _factor;
-        private int _mult;
+        private int _add;
 
-        public XDecoratorProvider(
-            XFactor factor,
-            int mult
-            )
+        public XDecoratorProvider(int add)
         {
-            _factor = factor;
-            _mult = mult;
+            _add = add;
         }
 
         public IXService Decorate(IXService target)
         {
-            return new XDecorator(target, _factor, _mult);
+            return new XDecorator(target, _add);
         }
     }
 }

@@ -12,29 +12,27 @@ namespace Autofac.Decorator.Tests.TrueDecoratorTests
         public void Test()
         {
             var b = new ContainerBuilder();
-
-            b.RegisterInstance(new XFactor(3));
-
+            
             b.RegisterType<XServiceImpl>().Named<IXService>("X");
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("X")
-                .WithParameter("mult", 10);
+                .WithParameter("add", 90);
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("X")
-                .WithParameter("mult", 100);
+                .WithParameter("add", 800);
 
             b.RegisterDecorator<IXService>(t => t, fromKey: "X", toKey: "Y");
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("Y")
-                .WithParameter("mult", 1000);
+                .WithParameter("add", 7000);
             b.RegisterTrueDecorator<XDecorator>()
                 .Named<IXService>("Y")
-                .WithParameter("mult", 10000);
+                .WithParameter("add", 60000);
 
             b.RegisterDecorator<IXService>(t => t, fromKey: "X");
             b.RegisterTrueDecorator<XDecorator>()
                 .As<IXService>()
-                .WithParameter("mult", 100000);
+                .WithParameter("add", 500000);
 
             var c = b.Build();
 
@@ -42,15 +40,15 @@ namespace Autofac.Decorator.Tests.TrueDecoratorTests
             {
                 var x = scope.ResolveNamed<IXService>("X");
 
-                Assert.AreEqual(x.X(), 334);
+                Assert.AreEqual(x.X(), 891);
 
                 x = scope.ResolveNamed<IXService>("Y");
 
-                Assert.AreEqual(x.X(), 33334);
+                Assert.AreEqual(x.X(), 67891);
 
                 x = scope.Resolve<IXService>();
 
-                Assert.AreEqual(x.X(), 300334);
+                Assert.AreEqual(x.X(), 500891);
             }
         }
     }
