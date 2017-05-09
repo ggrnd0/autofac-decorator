@@ -22,4 +22,18 @@ namespace Autofac.Decorator.Tests.Impl
             return _target.X() + _add;
         }
     }
+
+    class XDecoratorAdd90 : XDecorator
+    {
+        public XDecoratorAdd90(IXService target)
+            : base(target, 90)
+        { }
+    }
+
+    class XDecoratorAdd800 : XDecorator
+    {
+        public XDecoratorAdd800(IXService target)
+            : base(target, 800)
+        { }
+    }
 }
